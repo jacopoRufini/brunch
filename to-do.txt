@@ -1,0 +1,16 @@
+. get all informations using go-git apis
+. choose default format
+    . [timestamp] | [branch] | [latest-commit] (max n chars)
+. print a message in the right format
+. configure it
+	. number of branches
+	. what to show
+	.
+. choose the wanted branch interacting with it
+. shortcuts
+	.1 show all commits for the selected branch
+. fuzzy find?
+
+
+. possible bugs
+    . repository could have less than count (we need to stop earlier)
