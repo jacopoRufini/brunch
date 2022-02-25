@@ -9,8 +9,8 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "internal",
-	Short: "internal displays all recent branches for a given git repository",
+	Use:   "brunch",
+	Short: "brunch displays all recent branches for a given git repository",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		count, err := cmd.Flags().GetInt("count")
 		if err != nil {
