@@ -59,12 +59,12 @@ func Brunch(repositoryName string, count int) ([]DisplayObject, error) {
 	for _, i := range items[:until] {
 		branchName := strings.Replace(i.branch.Name().String(), "refs/heads/", "", 1)
 		timestamp := fmt.Sprintf("%d days ago", int(time.Since(i.commit.Author.When).Hours()/24))
-
-		displayName := fmt.Sprintf("%s | %s\n", timestamp, branchName)
+		commitMessage := i.commit.Message
 
 		displayObjects = append(displayObjects, DisplayObject{
-			DisplayName: displayName,
-			BranchName:  branchName,
+			When:          timestamp,
+			BranchName:    branchName,
+			CommitMessage: commitMessage,
 		})
 	}
 

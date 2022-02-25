@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"os/exec"
 )
 
 var rootCmd = &cobra.Command{
@@ -27,7 +28,17 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		brunch.Prompt(displayObjects)
+		selected, err := brunch.Prompt(displayObjects)
+		if err != nil {
+			return err
+		}
+
+		err = exec.Command("git", "checkout", selected).Run()
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("Switched to branch %s!\n", selected)
 
 		return nil
 	},
