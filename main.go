@@ -33,8 +33,6 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		fmt.Printf("Switched to branch %s!\n", selected)
-
 		return nil
 	},
 }

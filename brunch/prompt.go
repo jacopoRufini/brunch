@@ -14,9 +14,9 @@ type DisplayObject struct {
 func Prompt(objects []DisplayObject) (string, error) {
 	templates := &promptui.SelectTemplates{
 		Label:    "{{ . }}?",
-		Active:   "\U0001F336 {{ .BranchName | cyan }}",
+		Active:   "⇨ {{ .BranchName | yellow }}",
 		Inactive: "  {{ .BranchName | cyan }}",
-		Selected: "\U0001F336 {{ .BranchName | red | cyan }}",
+		Selected: "✘ {{ .BranchName | yellow }}",
 		Details: `
 --------- INFO ----------
 {{ "When:" | faint }}	{{ .When }},
