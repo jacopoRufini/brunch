@@ -19,8 +19,8 @@ type item struct {
 	commit *object.Commit
 }
 
-func Brunch(repositoryName string, count int) ([]DisplayObject, error) {
-	repo, err := git.PlainOpen(repositoryName)
+func Brunch(count int) ([]DisplayObject, error) {
+	repo, err := git.PlainOpen(".")
 	if err != nil {
 		return nil, err
 	}
