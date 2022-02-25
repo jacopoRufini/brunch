@@ -1,7 +1,7 @@
 package main
 
 import (
-	"brunch/brunch"
+	"brunch/internal"
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
@@ -9,21 +9,21 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "brunch",
-	Short: "brunch displays all recent branches for a given git repository",
+	Use:   "internal",
+	Short: "internal displays all recent branches for a given git repository",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		count, err := cmd.Flags().GetInt("count")
 		if err != nil {
 			return err
 		}
 
-		var displayObjects []brunch.DisplayObject
-		displayObjects, err = brunch.Brunch(count)
+		var displayObjects []internal.DisplayObject
+		displayObjects, err = internal.Brunch(count)
 		if err != nil {
 			return err
 		}
 
-		selected, err := brunch.Prompt(displayObjects)
+		selected, err := internal.Prompt(displayObjects)
 		if err != nil {
 			return err
 		}
