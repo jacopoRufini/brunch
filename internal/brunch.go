@@ -5,6 +5,8 @@ import (
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -19,8 +21,35 @@ type item struct {
 	commit *object.Commit
 }
 
+// findCurrentRepository is a utility to read the repository on the current directory
+// if no git repository is found, this function recursively tries to find a repository from the parent folder, until the home directory is reached
+func findCurrentRepository() (*git.Repository, error) {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return nil, fmt.Errorf("could not get the user directory while trying to find the current git repository: %v", err)
+	}
+
+	dir, err := os.Getwd()
+	if err != nil {
+		return nil, fmt.Errorf("could not current directory: %v", err)
+	}
+
+	for {
+		repo, err := git.PlainOpen(dir)
+		if err == nil {
+			return repo, nil
+		}
+
+		if dir == home {
+			return nil, fmt.Errorf("could not find any git repository")
+		}
+
+		dir = filepath.Dir(dir)
+	}
+}
+
 func Brunch(count int) ([]DisplayObject, error) {
-	repo, err := git.PlainOpen(".")
+	repo, err := findCurrentRepository()
 	if err != nil {
 		return nil, err
 	}
