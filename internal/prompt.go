@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/manifoldco/promptui"
+	"os"
 	"strings"
 )
 
@@ -40,9 +41,9 @@ func Prompt(objects []DisplayObject) (string, error) {
 	}
 
 	i, _, err := prompt.Run()
-
 	if err != nil {
-		return "", err
+		// user pressed ctrl+C
+		os.Exit(1)
 	}
 
 	return objects[i].BranchName, nil
