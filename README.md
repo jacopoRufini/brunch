@@ -9,7 +9,3 @@ just type `brunch` inside a git repository to display the latest repositories th
 - Download latest release
 - run `chmod +x brunch`
 - move `brunch` to an executable path (e.g. `~/.local/bin`)
-
-## TODO
-- Handle ctrl+c to not display errors when pressed
-- Infer the GIT repository when the current path is a sub-directory
