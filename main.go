@@ -41,7 +41,7 @@ func main() {
 	rootCmd.Flags().IntP("count", "c", 8, "how many branches to display")
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		_, _ = fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
 }

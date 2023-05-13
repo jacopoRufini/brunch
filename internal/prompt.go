@@ -3,7 +3,6 @@ package internal
 import (
 	"github.com/manifoldco/promptui"
 	"os"
-	"strings"
 )
 
 type DisplayObject struct {
@@ -24,20 +23,11 @@ func Prompt(objects []DisplayObject) (string, error) {
 {{ "Message:" | faint }}	{{ .CommitMessage }}`,
 	}
 
-	searcher := func(input string, index int) bool {
-		obj := objects[index]
-		name := strings.Replace(strings.ToLower(obj.BranchName), " ", "", -1)
-		input = strings.Replace(strings.ToLower(input), " ", "", -1)
-
-		return strings.Contains(name, input)
-	}
-
 	prompt := promptui.Select{
 		Label:     "Select branch",
 		Items:     objects,
-		Templates: templates,
 		Size:      8,
-		Searcher:  searcher,
+		Templates: templates,
 	}
 
 	i, _, err := prompt.Run()
